@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>World Cultures, Traditions & Civilizations Report</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap');
+
+    :root {
+      --gold: #C9A84C;
+      --dark: #1a1a2e;
+      --mid: #16213e;
+      --accent: #0f3460;
+      --light: #f5f0e8;
+      --text: #2c2c2c;
+      --muted: #6b6b6b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.75;
+    }
+    html {
+  scroll-behavior: smooth;
+}
+
+body {
+  scroll-behavior: smooth;
+}
+
+    /* ── COVER ── */
+    .cover {
+      background: linear-gradient(160deg, var(--dark) 0%, var(--accent) 100%);
+      color: white;
+      text-align: center;
+      padding: 100px 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cover-badge {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      margin-bottom: 30px;
+    }
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .cover h1 span { color: var(--gold); }
+    .cover p.subtitle {
+      font-size: 1.05rem;
+      font-weight: 300;
+      font-style: italic;
+      opacity: 0.8;
+      max-width: 550px;
+      margin: 0 auto 40px;
+    }
+    .cover-divider {
+      width: 80px; height: 3px;
+      background: var(--gold);
+      margin: 0 auto 40px;
+    }
+    .cover-meta {
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+
+    /* ── TOC ── */
+    .toc {
+      background: white;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 50px 60px;
+      border-left: 5px solid var(--gold);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.07);
+    }
+    .toc h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 25px;
+      color: var(--dark);
+    }
+    .toc ol { padding-left: 22px; }
+    .toc li { margin-bottom: 8px; font-size: 1rem; color: var(--accent); }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .section-header {
+      background: linear-gradient(135deg, var(--dark), var(--accent));
+      color: white;
+      padding: 40px 50px;
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .section-header::after {
+      content: attr(data-num);
+      position: absolute;
+      right: 40px; top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Playfair Display', serif;
+      font-size: 7rem;
+      font-weight: 900;
+      opacity: 0.08;
+      line-height: 1;
+    }
+    .section-header .label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .section-header p {
+      margin-top: 10px;
+      opacity: 0.75;
+      font-size: 0.95rem;
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    /* ── CARDS ── */
+    .cards {
+      background: white;
+      border-radius: 0 0 4px 4px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+/* ── FADE-IN ON SCROLL ── */
+.card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  padding:30px;
+}
+
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delay based on position */
+.card:nth-child(odd)  { transition-delay: 0.1s; }
+.card:nth-child(even) { transition-delay: 0.25s; 
+    }
+    .card:last-child { border-bottom: none; }
+    .card:hover { background: #faf8f4; }
+
+    .card-num {
+      background: var(--dark);
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 1000;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 15px;
+      min-width: 56px;
+    }
+
+    .card-body {
+      padding: 22px 28px;
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .card-origin {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .card-info {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid #ddd;
+      margin-top: 60px;
+    }
+    footer span { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-badge">AUMH 202</div>
+  <h1>World <span>Cultures,</span> Traditions<br>&amp; Civilizations</h1>
+  <p class="subtitle">An illustrated overview of humanity's greatest cultural expressions, living traditions, and foundational civilizations across history.</p>
+  <div class="cover-divider"></div>
+  <div class="cover-meta">February 2026 &nbsp;·&nbsp; 45 Entries &nbsp;·&nbsp; 3 Categories</div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ol>
+    <li>Section I — 15 Types of World Cultures</li>
+    <li>Section II — 15 Types of World Traditions</li>
+    <li>Section III — 15 Types of World Civilizations</li>
+  </ol>
+</div>
+
+<!-- SECTION I: CULTURES -->
+<div class="section">
+  <div class="section-header" data-num="I">
+    <div class="label">Section One</div>
+    <h2>15 Types of World Cultures</h2>
+    <p>Distinct ways of life, belief systems, arts, and social structures that define human communities across the globe.</p>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-num">01</div>
+      <div class="card-body">
+        <div class="card-title">Japanese Culture</div>
+        <div class="card-origin">📍 Japan, East Asia</div>
+        <div class="card-info">Japanese culture is a rich blend of ancient traditions and modern innovation.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">02</div>
+      <div class="card-body">
+        <div class="card-title">Yoruba Culture</div>
+        <div class="card-origin">📍 Southwest Nigeria & Benin, West Africa</div>
+        <div class="card-info">The Yoruba are one of Africa's largest ethnic groups with a deeply spiritual culture centred on the Orisha deity system.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">03</div>
+      <div class="card-body">
+        <div class="card-title">Celtic Culture</div>
+        <div class="card-origin">📍 British Isles & Western Europe</div>
+        <div class="card-info">The ancient Celts inhabited much of Iron Age Europe</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">04</div>
+      <div class="card-body">
+        <div class="card-title">Andean Culture</div>
+        <div class="card-origin">📍 Peru, Bolivia & Ecuador, South America</div>
+        <div class="card-info">Centred in the Andes Mountains and predating the Inca Empire, this culture is known for stunning textile art using alpaca and llama wool.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">05</div>
+      <div class="card-body">
+        <div class="card-title">Indian Culture</div>
+        <div class="card-origin">📍 Indian Subcontinent, South Asia</div>
+        <div class="card-info">One of the world's oldest continuous cultures spanning over 5,000 years. India is the birthplace of Hinduism, Buddhism, Jainism, and Sikhism.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">06</div>
+      <div class="card-body">
+        <div class="card-title">Māori Culture</div>
+        <div class="card-origin">📍 New Zealand (Aotearoa), Pacific</div>
+        <div class="card-info">The indigenous Polynesian culture of New Zealand.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">07</div>
+      <div class="card-body">
+        <div class="card-title">Persian Culture</div>
+        <div class="card-origin">📍 Iran (Persia), Middle East</div>
+        <div class="card-info">Persian culture stretches back to the Achaemenid Empire (550 BC).</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">08</div>
+      <div class="card-body">
+        <div class="card-title">Aboriginal Australian Culture</div>
+        <div class="card-origin">📍 Australia</div>
+        <div class="card-info">With a documented history exceeding 65,000 years, Aboriginal Australians hold the world's oldest continuous cultural tradition.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">09</div>
+      <div class="card-body">
+        <div class="card-title">Chinese Culture</div>
+        <div class="card-origin">📍 China, East Asia</div>
+        <div class="card-info">Shaped over 4,000+ years, Chinese culture is among the most influential in human history.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">10</div>
+      <div class="card-body">
+        <div class="card-title">Aztec Culture</div>
+        <div class="card-origin">📍 Central Mexico, Mesoamerica</div>
+        <div class="card-info">Flourishing from the 14th to 16th centuries, Aztec culture centred on the grand city of Tenochtitlán.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">11</div>
+      <div class="card-body">
+        <div class="card-title">Swahili Culture</div>
+        <div class="card-origin">📍 East African Coast (Kenya, Tanzania, Mozambique)</div>
+        <div class="card-info">Born from the fusion of Bantu African and Arab trading influences, Swahili culture produced a unique language (Kiswahili) serving as a lingua franca for over 200 million people.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">12</div>
+      <div class="card-body">
+        <div class="card-title">Norse Culture</div>
+        <div class="card-origin">📍 Scandinavia (Norway, Sweden, Denmark)</div>
+        <div class="card-info">The Norse (Vikings) were seafaring explorers and warriors who reached from North America to the Byzantine Empire.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">13</div>
+      <div class="card-body">
+        <div class="card-title">Ethiopian Culture</div>
+        <div class="card-origin">📍 Ethiopia, Horn of Africa</div>
+        <div class="card-info">Home to one of Africa's oldest continuous civilizations, never colonized.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">14</div>
+      <div class="card-body">
+        <div class="card-title">Ottoman Culture</div>
+        <div class="card-origin">📍 Turkey & Former Ottoman Empire, Middle East & Eastern Europe</div>
+        <div class="card-info">The Ottoman Empire (1299–1922) produced a sophisticated culture blending Turkish, Arab, Persian, Greek, and Balkan influences.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">15</div>
+      <div class="card-body">
+        <div class="card-title">Inuit Culture</div>
+        <div class="card-origin">📍 Arctic — Canada, Alaska, Greenland & Russia</div>
+        <div class="card-info">One of the most specialized cultures in human history, adapted for extreme Arctic survival.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION II: TRADITIONS -->
+<div class="section">
+  <div class="section-header" data-num="II">
+    <div class="label">Section Two</div>
+    <h2>15 Types of World Traditions</h2>
+    <p>Ceremonies, customs, and practices passed down through generations marking life's most significant milestones and communal bonds.</p>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-num">01</div>
+      <div class="card-body">
+        <div class="card-title">Día de los Muertos (Day of the Dead)</div>
+        <div class="card-origin">📍 Mexico, Mesoamerica</div>
+        <div class="card-info">Celebrated November 1–2, blending pre-Columbian Aztec rituals with Catholic All Saints' and All Souls' Days.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">02</div>
+      <div class="card-body">
+        <div class="card-title">Hanami (Cherry Blossom Viewing)</div>
+        <div class="card-origin">📍 Japan</div>
+        <div class="card-info">The centuries-old Japanese custom of gathering under blooming cherry (sakura) trees in spring to appreciate their fleeting beauty.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">03</div>
+      <div class="card-body">
+        <div class="card-title">Nowruz (Persian New Year)</div>
+        <div class="card-origin">📍 Iran, Central Asia & the Persian Diaspora</div>
+        <div class="card-info">Over 3,000 years old and rooted in Zoroastrian tradition, Nowruz marks the spring equinox as the new year.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">04</div>
+      <div class="card-body">
+        <div class="card-title">Holi (Festival of Colors)</div>
+        <div class="card-origin">📍 India & Nepal, South Asia</div>
+        <div class="card-info">The exuberant Hindu spring festival where participants throw vibrant colored powders celebrating the victory of good over evil (legend of Prahlad and Holika) and the divine love of Radha and Krishna.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">05</div>
+      <div class="card-body">
+        <div class="card-title">Quinceañera</div>
+        <div class="card-origin">📍 Latin America (Mexico, Central & South America)</div>
+        <div class="card-info">A coming-of-age tradition celebrating a girl's 15th birthday, marking her transition to womanhood.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">06</div>
+      <div class="card-body">
+        <div class="card-title">Carnival (Mardi Gras)</div>
+        <div class="card-origin">📍 Brazil, Caribbean, Italy & worldwide</div>
+        <div class="card-info">A pre-Lenten festival of feasting, masquerade, music, and dance practiced across Catholic cultures.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">07</div>
+      <div class="card-body">
+        <div class="card-title">Japanese Tea Ceremony (Chado)</div>
+        <div class="card-origin">📍 Japan</div>
+        <div class="card-info">A meditative ritual rooted in Zen Buddhist philosophy, developed in the 9th century and formalized by tea master Sen no Rikyū in the 16th century.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">08</div>
+      <div class="card-body">
+        <div class="card-title">Bar/Bat Mitzvah</div>
+        <div class="card-origin">📍 Israel & Jewish communities worldwide</div>
+        <div class="card-info">A Jewish coming-of-age ceremony: Bar Mitzvah for boys at 13, Bat Mitzvah for girls at 12–13, marking the assumption of religious responsibility.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">09</div>
+      <div class="card-body">
+        <div class="card-title">Obon Festival</div>
+        <div class="card-origin">📍 Japan</div>
+        <div class="card-info">A Buddhist tradition held in mid-August to honor the spirits of deceased ancestors.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">10</div>
+      <div class="card-body">
+        <div class="card-title">Potlatch Ceremony</div>
+        <div class="card-origin">📍 Pacific Northwest Coast, Indigenous North America</div>
+        <div class="card-info">A ceremonial feast practiced by Pacific Northwest Indigenous peoples (Haida, Tlingit, Kwakwaka'wakw) in which the host gives away large quantities of goods.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">11</div>
+      <div class="card-body">
+        <div class="card-title">Diwali (Festival of Lights)</div>
+        <div class="card-origin">📍 India, Nepal & South Asian diaspora worldwide</div>
+        <div class="card-info">The "festival of lights" observed by Hindus, Sikhs, Jains, and some Buddhists.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">12</div>
+      <div class="card-body">
+        <div class="card-title">Highland Games</div>
+        <div class="card-origin">📍 Scotland, United Kingdom</div>
+        <div class="card-info">Athletic and cultural festivals dating to at least the 11th century, originally used by clan chiefs to select the strongest warriors.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">13</div>
+      <div class="card-body">
+        <div class="card-title">Inti Raymi (Festival of the Sun)</div>
+        <div class="card-origin">📍 Cusco, Peru (Inca tradition)</div>
+        <div class="card-info">The Inca festival honoring Inti, the Sun God, held during the Southern Hemisphere winter solstice (June 24).</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">14</div>
+      <div class="card-body">
+        <div class="card-title">Dragon Boat Festival (Duanwu)</div>
+        <div class="card-origin">📍 China, East Asia</div>
+        <div class="card-info">Held on the 5th day of the 5th lunar month, commemorating the patriotic poet Qu Yuan (340–278 BC) who drowned himself in protest of corrupt governance.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">15</div>
+      <div class="card-body">
+        <div class="card-title">Ethiopian Coffee Ceremony (Buna)</div>
+        <div class="card-origin">📍 Ethiopia, Horn of Africa</div>
+        <div class="card-info">A formal social ritual lasting two to three hours, central to community and hospitality life in the birthplace of coffee.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION III: CIVILIZATIONS -->
+<div class="section">
+  <div class="section-header" data-num="III">
+    <div class="label">Section Three</div>
+    <h2>15 Types of World Civilizations</h2>
+    <p>The great organized societies that shaped human history through governance, technology, philosophy, and empire.</p>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-num">01</div>
+      <div class="card-body">
+        <div class="card-title">Ancient Egyptian Civilization</div>
+        <div class="card-origin">📍 Nile Valley, Northeast Africa — c. 3100–30 BC</div>
+        <div class="card-info">One of the world's longest-lasting civilizations, thriving for over 3,000 years. Celebrated for monumental architecture (Pyramids of Giza, Sphinx, Karnak Temple).</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">02</div>
+      <div class="card-body">
+        <div class="card-title">Mesopotamian Civilization (Sumer & Babylon)</div>
+        <div class="card-origin">📍 Tigris-Euphrates Valley, modern Iraq — c. 3500–539 BC</div>
+        <div class="card-info">The "Cradle of Civilization" produced humanity's firsts: the first writing system (cuneiform), first legal codes (Code of Hammurabi), first cities (Ur, Uruk, Babylon), and earliest known literature (Epic of Gilgamesh).</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">03</div>
+      <div class="card-body">
+        <div class="card-title">Ancient Greek Civilization</div>
+        <div class="card-origin">📍 Greek Peninsula & Aegean Islands — c. 800–31 BC</div>
+        <div class="card-info">The foundational civilization of Western thought. Contributions include democracy (Athens), philosophy (Socrates, Plato, Aristotle), theatre, the Olympic Games, mathematics (Euclid, Pythagoras), and monumental architecture (the Parthenon).</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">04</div>
+      <div class="card-body">
+        <div class="card-title">Roman Civilization</div>
+        <div class="card-origin">📍 Italian Peninsula, expanding across Europe & Mediterranean — 753 BC–476 AD</div>
+        <div class="card-info">Rome grew from a city-state into an empire governing over 70 million people. Roman law forms the basis of most modern legal systems; Roman engineering produced aqueducts and roads lasting millennia; Latin evolved into the Romance languages.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">05</div>
+      <div class="card-body">
+        <div class="card-title">Indus Valley Civilization</div>
+        <div class="card-origin">📍 Northwest Indian Subcontinent (Pakistan & India) — c. 3300–1300 BC</div>
+        <div class="card-info">One of the world's earliest urban cultures, with sophisticated planned cities like Mohenjo-daro featuring grid streets, advanced drainage systems, and standardized weights and measures.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">06</div>
+      <div class="card-body">
+        <div class="card-title">Chinese (Han) Civilization</div>
+        <div class="card-origin">📍 Yellow River Valley, East Asia — c. 2100 BC–present</div>
+        <div class="card-info">The world's longest continuously existing civilization. The Han Dynasty (206 BC–220 AD) established the model of Chinese imperial governance, unified the writing system, expanded the Silk Road.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">07</div>
+      <div class="card-body">
+        <div class="card-title">Maya Civilization</div>
+        <div class="card-origin">📍 Southern Mexico, Guatemala & Belize — c. 2000 BC–1500 AD</div>
+        <div class="card-info">Developed a fully formed hieroglyphic writing system, an accurate astronomical calendar predicting solar eclipses centuries in advance.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">08</div>
+      <div class="card-body">
+        <div class="card-title">Islamic Golden Age Civilization</div>
+        <div class="card-origin">📍 Baghdad, Cairo & Córdoba — 8th–14th century AD</div>
+        <div class="card-info">While Europe lived through the medieval period, the Islamic world's golden age centered at Baghdad's House of Wisdom produced original contributions in algebra .</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">09</div>
+      <div class="card-body">
+        <div class="card-title">Inca Civilization</div>
+        <div class="card-origin">📍 Andes Mountains, western South America — c. 1400–1533 AD</div>
+        <div class="card-info">The largest empire in pre-Columbian America, stretching 4,000 km along the Andes. Without a written language or the wheel, the Inca built a 40,000 km road network.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">10</div>
+      <div class="card-body">
+        <div class="card-title">Byzantine Civilization</div>
+        <div class="card-origin">📍 Constantinople (Istanbul), Eastern Mediterranean — 330–1453 AD</div>
+        <div class="card-info">The eastern continuation of the Roman Empire, surviving over a thousand years after Rome's fall.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">11</div>
+      <div class="card-body">
+        <div class="card-title">Aztec (Mexica) Civilization</div>
+        <div class="card-origin">📍 Central Mexico, Mesoamerica — c. 1300–1521 AD</div>
+        <div class="card-info">Centered on the island-city of Tenochtitlán (modern Mexico City), the Aztec Empire controlled 5–6 million people at its peak.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">12</div>
+      <div class="card-body">
+        <div class="card-title">Mongol Civilization</div>
+        <div class="card-origin">📍 Central Asian Steppe (Mongolia) — c. 1206–1368 AD</div>
+        <div class="card-info">Under Genghis Khan, the Mongol Empire became the largest contiguous land empire in history, spanning from the Pacific to Eastern Europe.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">13</div>
+      <div class="card-body">
+        <div class="card-title">Mali Empire (West African Civilization)</div>
+        <div class="card-origin">📍 West Africa (modern Mali, Senegal, Guinea) — c. 1235–1600 AD</div>
+        <div class="card-info">One of history's largest and wealthiest empires, controlling the trans-Saharan gold and salt trade.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">14</div>
+      <div class="card-body">
+        <div class="card-title">Persian (Achaemenid) Civilization</div>
+        <div class="card-origin">📍 Iran, extending across the Middle East — c. 550–330 BC</div>
+        <div class="card-info">Founded by Cyrus the Great, the Achaemenid Persian Empire was the first true world empire, stretching from Greece to India.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-num">15</div>
+      <div class="card-body">
+        <div class="card-title">Khmer (Angkor) Civilization</div>
+        <div class="card-origin">📍 Cambodia, Southeast Asia — 802–1431 AD</div>
+        <div class="card-info">The most powerful state in Southeast Asia for over six centuries. Angkor may have housed up to a million people, making it the largest pre-industrial city in the world.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong style="font-family:'Playfair Display',serif; font-size:1.1rem; color:#333;">World Cultures, Traditions &amp; Civilizations Report</strong><br/>
+  <span>45 Entries · 3 Categories</span> &nbsp;·&nbsp; Compiled February 2026 &nbsp;·&nbsp; For Educational Purposes
+</footer>
+<script>
+ const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.05,       // triggers very early — just 5% visible
+    rootMargin: '0px 0px -40px 0px'  // fires slightly before fully in view
+  });
+
+  document.querySelectorAll('.card').forEach(card => {
+    observer.observe(card);
+  });
+  let currentY = window.scrollY;
+  let targetY  = window.scrollY;
+  let rafId    = null;
+
+  window.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    targetY += e.deltaY * 0.6; // 0.6 = scroll speed, lower = slower
+    targetY  = Math.max(0, Math.min(targetY, document.body.scrollHeight - window.innerHeight));
+    if (!rafId) animate();
+  }, { passive: false });
+
+  function animate() {
+    currentY += (targetY - currentY) * 0.08; // 0.08 = smoothness, lower = silkier
+    window.scrollTo(0, currentY);
+    if (Math.abs(targetY - currentY) > 0.5) {
+      rafId = requestAnimationFrame(animate);
+    } else {
+      window.scrollTo(0, targetY);
+      rafId = null;
+    }
+  }
+
+  /* ── FADE-IN ON SCROLL ── */
+  const ob = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        ob.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.05,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.card').forEach(card => {
+    ob.observe(card);
+  });
+</script>
+</body>
+</html>
